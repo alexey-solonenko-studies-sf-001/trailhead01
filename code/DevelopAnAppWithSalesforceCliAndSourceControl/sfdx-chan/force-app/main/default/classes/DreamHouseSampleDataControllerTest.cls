@@ -5,6 +5,7 @@ private class DreamHouseSampleDataControllerTest {
     static void test_deleteAll() {
 
         Property__c property = new Property__c();
+        property.Street_Address__c = 'Test';
         Broker__c broker = new Broker__c();
 
         insert property;
