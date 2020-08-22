@@ -19,7 +19,7 @@
                             "referenceId": "Property__cRef1"
                         },
                         "Address__c": "48 Brattle St",
-                        "Assessed_Value__c": 324000,
+                        "Street_Address__c":"test", "Assessed_Value__c":324000,
                         "Baths__c": 4,
                         "Beds__c": 5,
                         "City__c": "Cambridge",
@@ -59,7 +59,7 @@
                             "referenceId": "Property__cRef2"
                         },
                         "Address__c": "95 Gloucester St",
-                        "Assessed_Value__c": 531300,
+                        "Street_Address__c":"test", "Assessed_Value__c":531300,
                         "Baths__c": 3,
                         "Beds__c": 3,
                         "City__c": "Boston",
@@ -83,7 +83,7 @@
                             "referenceId": "Property__cRef3"
                         },
                         "Address__c": "121 Harborwalk Drive",
-                        "Assessed_Value__c": 297000,
+                        "Street_Address__c":"test", "Assessed_Value__c":297000,
                         "Baths__c": 3,
                         "Beds__c": 3,
                         "City__c": "Boston",
@@ -107,7 +107,7 @@
                             "referenceId": "Property__cRef4"
                         },
                         "Address__c": "18 Henry St",
-                        "Assessed_Value__c": 770250,
+                        "Street_Address__c":"test", "Assessed_Value__c":770250,
                         "Baths__c": 3,
                         "Beds__c": 4,
                         "City__c": "Cambridge",
@@ -147,7 +147,7 @@
                             "referenceId": "Property__cRef5"
                         },
                         "Address__c": "145 Commonwealth Ave",
-                        "Assessed_Value__c": 701350,
+                        "Street_Address__c":"test", "Assessed_Value__c":701350,
                         "Baths__c": 3,
                         "Beds__c": 4,
                         "City__c": "Boston",
@@ -171,7 +171,7 @@
                             "referenceId": "Property__cRef6"
                         },
                         "Address__c": "503 Park Drive",
-                        "Assessed_Value__c": 539500,
+                        "Street_Address__c":"test", "Assessed_Value__c":539500,
                         "Baths__c": 2,
                         "Beds__c": 2,
                         "City__c": "Boston",
@@ -195,7 +195,7 @@
                             "referenceId": "Property__cRef7"
                         },
                         "Address__c": "24 Pearl St",
-                        "Assessed_Value__c": 1008000,
+                        "Street_Address__c":"test", "Assessed_Value__c":1008000,
                         "Baths__c": 4,
                         "Beds__c": 5,
                         "City__c": "Cambridge",
@@ -235,7 +235,7 @@
                             "referenceId": "Property__cRef8"
                         },
                         "Address__c": "61 West Cedar St",
-                        "Assessed_Value__c": 660000,
+                        "Street_Address__c":"test", "Assessed_Value__c":660000,
                         "Baths__c": 4,
                         "Beds__c": 5,
                         "City__c": "Boston",
@@ -275,7 +275,7 @@
                             "referenceId": "Property__cRef9"
                         },
                         "Address__c": "32 Prince st",
-                        "Assessed_Value__c": 762600,
+                        "Street_Address__c":"test", "Assessed_Value__c":762600,
                         "Baths__c": 4,
                         "Beds__c": 5,
                         "City__c": "Cambridge",
@@ -315,7 +315,7 @@
                             "referenceId": "Property__cRef10"
                         },
                         "Address__c": "211 Charles Street",
-                        "Assessed_Value__c": 722500,
+                        "Street_Address__c":"test", "Assessed_Value__c":722500,
                         "Baths__c": 2,
                         "Beds__c": 3,
                         "City__c": "Boston",
@@ -355,7 +355,7 @@
                             "referenceId": "Property__cRef11"
                         },
                         "Address__c": "448 Hanover St",
-                        "Assessed_Value__c": 594500,
+                        "Street_Address__c":"test", "Assessed_Value__c":594500,
                         "Baths__c": 2,
                         "Beds__c": 4,
                         "City__c": "Boston",
@@ -395,7 +395,7 @@
                             "referenceId": "Property__cRef12"
                         },
                         "Address__c": "127 Endicott St",
-                        "Assessed_Value__c": 319500,
+                        "Street_Address__c":"test", "Assessed_Value__c":319500,
                         "Baths__c": 1,
                         "Beds__c": 3,
                         "City__c": "Boston",
