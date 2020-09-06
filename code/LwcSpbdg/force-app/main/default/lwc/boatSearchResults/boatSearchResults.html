@@ -10,7 +10,7 @@
                 size="12"
                 large-device-size="3"
                 medium-device-size="4"
-                small-device-size=""
+                small-device-size="6"
                 padding="around-small"
               >
                 <c-boat-tile
@@ -24,8 +24,10 @@
         </div>
       </lightning-tab>
       <lightning-tab label="Boat Editor"> boat editor to do </lightning-tab>
-      <lightning-tab label="Boats Near Me"> boat editor to do </lightning-tab>
+      <lightning-tab label="Boats Near Me">
+        <c-boats-near-me boat-type-id={boatTypeId}></c-boats-near-me>
+      </lightning-tab>
     </lightning-tabset>
   </template>
-  <template if:false={boats.data}> {boats.error} </template>
+  <template if:true={boats.error}> {boats.error} </template>
 </template>

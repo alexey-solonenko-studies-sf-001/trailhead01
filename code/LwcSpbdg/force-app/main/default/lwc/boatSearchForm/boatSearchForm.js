@@ -28,12 +28,17 @@ export default class BoatSearchForm extends LightningElement {
 
   handleSearchOptionChange(evt) {
     try {
+      this.selectedBoatTypeId = evt.target.value;
+      console.log(
+        "handle search option change, this.selectedBoatTypeId = ",
+        this.selectedBoatTypeId
+      );
       let searchEvent = new CustomEvent("search", {
         detail: {
+          //boatTypeId: this.selectedBoatTypeId
           boatTypeId: evt.target.value
         }
       });
-      this.selectedBoatTypeId = evt.target.value;
       this.dispatchEvent(searchEvent);
     } catch (e) {
       console.log("handle search option error, event.target was ");
