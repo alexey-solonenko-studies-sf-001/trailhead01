@@ -1,41 +1,44 @@
-import { LightningElement, api, wire, track } from 'lwc';
-import getBoatTypes from '@salesforce/apex/BoatDataService.getBoatTypes'
+import { LightningElement, wire, track } from "lwc";
+import getBoatTypes from "@salesforce/apex/BoatDataService.getBoatTypes";
 
 export default class BoatSearchForm extends LightningElement {
+  selectedBoatTypeId = "";
+  error = undefined;
 
-    @api
-    selectedBoatTypeId = '';
+  @track
+  searchOptions;
 
-    // Private
-    error = undefined;
-
-    @track
-    searchOptions;
-
-
-    @wire(getBoatTypes)
-    boatTypes({ error, data }) {
-        if (data) {
-            this.searchOptions = data.map(type => {
-                return ({
-                    label: type.name,
-                    value: type.id
-                });
-            });
-        } else if (error) {
-            this.searchOptions = undefined;
-            this.error = error;
-        }
-    };
-
-    handleSearchOptionChange(ev){
-        let searchEvent = new CustomEvent('search');
-        searchEvent.detail = {
-            boatTypeId: this.selectedBoatTypeId
+  @wire(getBoatTypes)
+  boatTypes({ error, data }) {
+    if (data) {
+      this.searchOptions = data.map((type) => {
+        return {
+          label: type.Name,
+          value: type.Id
         };
-        this.dispatchEvent(searchEvent);
+      });
+      this.searchOptions = [{ label: "All Types", value: "" }].concat(
+        this.searchOptions
+      );
+    } else if (error) {
+      this.searchOptions = undefined;
+      this.error = error;
     }
+  }
 
-
-
+  handleSearchOptionChange(evt) {
+    try {
+      let searchEvent = new CustomEvent("search", {
+        detail: {
+          boatTypeId: evt.target.value
+        }
+      });
+      this.selectedBoatTypeId = evt.target.value;
+      this.dispatchEvent(searchEvent);
+    } catch (e) {
+      console.log("handle search option error, event.target was ");
+      console.log(evt.target);
+      console.log(this.selectedBoatTypeId);
+    }
+  }
 }

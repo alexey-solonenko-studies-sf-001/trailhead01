@@ -1,25 +1,34 @@
 <template>
-    <lightning-layout multiple-rows>
-        <!-- search boat form -->
-        <lightning-layout-item size='12'>
-            <lightning-card title='Find Boat'>
-                <p class="slds-var-p-horizontal_small">
-                    <c-boat-search-form>
+  <lightning-layout multiple-rows>
+    <!-- search boat form -->
+    <lightning-layout-item size="12">
+      <lightning-card title="Find a boat">
+        <lightning-button
+          label="New Boat"
+          onclick={createNewBoat}
+          slot="actions"
+        ></lightning-button>
+        <p class="slds-var-p-horizontal_small">
+          <c-boat-search-form onsearch={searchBoats}> </c-boat-search-form>
+        </p>
+      </lightning-card>
+    </lightning-layout-item>
 
-                    </c-boat-search-form>
-                </p>
-            </lightning-card>
-        </lightning-layout-item>
-
-        <!-- results section -->
-        <lightning-layout-item size='12' class="slds-p-top_small slds-is-relative">
-            <template if:false={isLoading}>
-                <c-boat-search-resuls onloading={handleLoading} ondoneloading={handleDoneLoading}>
-                </c-boat-search-resuls>
-            </template>
-            <template if:true={isLoading}>
-                <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
-            </template>
-        </lightning-layout-item>
-    </lightning-layout>
+    <!-- results section -->
+    <lightning-layout-item size="12" class="slds-p-top_small slds-is-relative">
+      <template if:false={isLoading}>
+        <c-boat-search-results
+          onloading={handleLoading}
+          ondoneloading={handleDoneLoading}
+        >
+        </c-boat-search-results>
+      </template>
+      <template if:true={isLoading}>
+        <lightning-spinner
+          alternative-text="Loading"
+          variant="brand"
+        ></lightning-spinner>
+      </template>
+    </lightning-layout-item>
+  </lightning-layout>
 </template>

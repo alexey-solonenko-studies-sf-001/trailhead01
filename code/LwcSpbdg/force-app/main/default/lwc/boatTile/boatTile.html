@@ -1,12 +1,19 @@
 <template>
-    <div onclick={selectBoat} class={tileClass}>
-        <div style={backgroundStyle} class="tile"></div>
-        <div class="lower-third">
-            <h1 class="slds-truncate sldx-text-heading_medium">{boatName}</h1>
-            <h2 class="slds-truncate sldx-text-heading_small">{boatOwnerName}</h2>
-            <div class="slds-text-body_small">{boatPrice}</div>
-            <div class="slds-text-body_small">{boatLength}</div>
-            <div class="slds-text-body_small">{boatType}</div>
-        </div>
+  <div onclick={selectBoat} class={tileClass}>
+    <div style={backgroundStyle} class="tile"></div>
+    <div class="lower-third">
+      <h1 class="slds-truncate sldx-text-heading_medium">{boatName}</h1>
+      <h2 class="slds-truncate sldx-text-heading_small">{boatOwnerName}</h2>
+      <div class="slds-text-body_small">
+        <lightning-formatted-number
+          value={boatPrice}
+          format-style="decimal"
+          maximum-fraction-digits="2"
+        >
+        </lightning-formatted-number>
+      </div>
+      <div class="slds-text-body_small">{boatLength}</div>
+      <div class="slds-text-body_small">{boatType}</div>
     </div>
+  </div>
 </template>
