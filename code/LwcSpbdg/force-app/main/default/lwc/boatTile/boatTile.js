@@ -35,7 +35,7 @@ export default class BoatTile extends LightningElement {
   }
 
   get backgroundStyle() {
-    return `background-image:url(${this.boatPicture})`;
+    return `background-image:url(${this.boat.Picture__c})`;
   }
 
   selectBoat() {

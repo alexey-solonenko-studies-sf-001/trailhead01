@@ -108,7 +108,7 @@ public with sharing class BoatDataService {
     ];
   }
 
-  @AuraEnabled(cacheable=true)
+  @AuraEnabled
   public static List<BoatReview__c> getAllReviews(Id boatId) {
     return [
       SELECT
