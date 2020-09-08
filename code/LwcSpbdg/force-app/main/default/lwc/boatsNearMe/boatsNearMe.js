@@ -35,7 +35,6 @@ export default class BoatsNearMe extends LightningElement {
   wiredBoatsJSON(res) {
     if (res.data) {
       let obj = JSON.parse(res.data);
-      console.log(obj);
       this.createMapMarkers(obj);
     } else if (res.error) {
       let toastEvt = new ShowToastEvent({

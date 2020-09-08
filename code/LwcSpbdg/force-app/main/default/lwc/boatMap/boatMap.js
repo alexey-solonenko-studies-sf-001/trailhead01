@@ -46,9 +46,6 @@ export default class BoatMap extends LightningElement {
   // Wire the getRecord method using ('$boatId')
   @wire(getRecord, { recordId: "$boatId", fields: BOAT_FIELDS })
   wiredRecord({ error, data }) {
-    console.log("wired record received data");
-    console.log(data);
-    console.log(error);
     // Error handling
     if (data) {
       this.error = undefined;
@@ -96,8 +93,6 @@ export default class BoatMap extends LightningElement {
         }
       }
     ];
-    console.log("updated map markers ");
-    console.log(this.mapMarkers);
   }
 
   // Getter method for displaying the map component, or a helper method.

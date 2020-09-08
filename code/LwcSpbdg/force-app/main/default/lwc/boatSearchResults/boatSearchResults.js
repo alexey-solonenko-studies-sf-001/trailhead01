@@ -68,6 +68,14 @@ export default class BoatSearchResults extends LightningElement {
 
   boatTypeId = "";
 
+  // get boatTypeId(){
+  //   return this.boatTypeId;
+  // }
+  // set boatTypeId(val){
+  //   this.setAttribute('boatTypeId',this.val);
+  //   this.boatTypeId = val;
+  // }
+
   boats;
 
   isLoading = false;
@@ -116,8 +124,13 @@ export default class BoatSearchResults extends LightningElement {
   }
 
   updateSelectedTile(event) {
-    this.selectedBoatId = event.detail.boatId;
-    this.sendMessageService(event.detail.boatId);
+    console.log("receiving event", event);
+    try {
+      this.selectedBoatId = event.detail.boatId;
+      this.sendMessageService(event.detail.boatId);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   sendMessageService(boatId) {
@@ -161,17 +174,11 @@ export default class BoatSearchResults extends LightningElement {
     let evt = isLoading ? "loading" : "doneloading";
     //this.isLoading = isLoading;
     this.dispatchEvent(new CustomEvent(evt));
-    console.log("notify loading completed and dispatched: ", evt);
   }
 
   renderedCallback() {
     console.log(
-      "rendered callback is been called, boat type id is: ",
-      this.boatTypeId
-    );
-    console.log(
-      "rendered callback is been called, selected boat id is: ",
-      this.selectedBoatId
+      "rendered callback is been called, boat type id is: " + this.boatTypeId
     );
   }
 }

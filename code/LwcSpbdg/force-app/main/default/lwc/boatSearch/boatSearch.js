@@ -1,6 +1,5 @@
 import { LightningElement } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
-import BOAT_OBJECT from "@salesforce/schema/Boat__c";
 
 export default class BoatSearch extends NavigationMixin(LightningElement) {
   boatTypeId;
