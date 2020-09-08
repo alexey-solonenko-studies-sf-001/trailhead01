@@ -3,16 +3,45 @@ import { refreshApex } from "@salesforce/apex";
 import getBoats from "@salesforce/apex/BoatDataService.getBoats";
 import BOATMC from "@salesforce/messageChannel/BoatMessageChannel__c";
 import { MessageContext, publish } from "lightning/messageService";
+import { updateRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import ID_FIELD from "@salesforce/schema/Boat__c.Id";
+import NAME_FIELD from "@salesforce/schema/Boat__c.Name";
+import LENGTH_FIELD from "@salesforce/schema/Boat__c.Length__c";
+import PRICE_FIELD from "@salesforce/schema/Boat__c.Price__c";
+import DESCRIPTION_FIELD from "@salesforce/schema/Boat__c.Description__c";
 
-// const SUCCESS_TITLE = 'Success';
-// const MESSAGE_SHIP_IT = 'Ship it!';
-// const SUCCESS_VARIANT = 'success';
-// const ERROR_TITLE = 'Error';
-// const ERROR_VARIANT = 'error';
+const SUCCESS_TITLE = "Success";
+const MESSAGE_SHIP_IT = "Ship it!";
+const SUCCESS_VARIANT = "success";
+const ERROR_TITLE = "Error";
+const ERROR_VARIANT = "error";
 
 export default class BoatSearchResults extends LightningElement {
   selectedBoatId;
-  columns = [];
+
+  columns = [
+    { label: "Name", fieldName: NAME_FIELD.fieldApiName, editable: true },
+    {
+      label: "Length",
+      fieldName: LENGTH_FIELD.fieldApiName,
+      type: "number",
+      typeAttributes: { maximumFractionDigits: 2 },
+      editable: true
+    },
+    {
+      label: "Price",
+      fieldName: PRICE_FIELD.fieldApiName,
+      type: "currency",
+      typeAttributes: { currencyCode: "USD", maximumFractionDigits: 2 },
+      editable: true
+    },
+    {
+      label: "Description",
+      fieldName: DESCRIPTION_FIELD.fieldApiName,
+      editable: true
+    }
+  ];
 
   boatTypeId = "";
 
@@ -133,5 +162,34 @@ export default class BoatSearchResults extends LightningElement {
       "rendered callback is been called, selected boat id is: ",
       this.selectedBoatId
     );
+  }
+
+  async handleSave(event) {
+    try {
+      const recordInputs = event.detail.draftValues.slice().map((draft) => {
+        const fields = Object.assign({}, draft);
+        return { fields };
+      });
+      const promises = recordInputs.map((recordInput) =>
+        updateRecord({ fields: recordInput.fields })
+      );
+      await Promise.all(promises);
+      await this.refresh();
+      const succEv = new ShowToastEvent({
+        title: SUCCESS_TITLE,
+        variant: SUCCESS_VARIANT,
+        message: MESSAGE_SHIP_IT
+      });
+      this.dispatchEvent(succEv);
+    } catch (e) {
+      const errEv = new ShowToastEvent({
+        title: ERROR_TITLE,
+        variant: ERROR_VARIANT,
+        message: e.toString()
+      });
+      this.dispatchEvent(errEv);
+    } finally {
+      console.log("finally");
+    }
   }
 }
