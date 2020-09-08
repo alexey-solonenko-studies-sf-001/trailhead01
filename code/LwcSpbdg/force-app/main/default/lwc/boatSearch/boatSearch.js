@@ -16,11 +16,6 @@ export default class BoatSearch extends NavigationMixin(LightningElement) {
     this.isLoading = false;
   }
 
-  // Handles search boat event
-  // This custom event comes from the form
-  /**
-   * @param {Event} event
-   */
   searchBoats(event) {
     console.log("boat search is receiving event from boat search form");
     this.boatTypeId = event.detail.boatTypeId;
@@ -28,11 +23,11 @@ export default class BoatSearch extends NavigationMixin(LightningElement) {
     boatSearchR.searchBoats(this.boatTypeId);
   }
 
-  async createNewBoat() {
+  createNewBoat() {
     this[NavigationMixin.Navigate]({
       type: "standard__objectPage",
       attributes: {
-        objectApiName: BOAT_OBJECT.objectApiName,
+        objectApiName: "Boat__c",
         actionName: "new"
       }
     });

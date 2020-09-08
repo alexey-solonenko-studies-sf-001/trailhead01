@@ -1,14 +1,18 @@
 // import BOATMC from the message channel
 import { LightningElement, wire, api, track } from "lwc";
 import BOATMC from "@salesforce/messageChannel/BoatMessageChannel__c";
-import { MessageContext, subscribe } from "lightning/messageService";
+import {
+  APPLICATION_SCOPE,
+  MessageContext,
+  subscribe
+} from "lightning/messageService";
 import { getRecord } from "lightning/uiRecordApi";
 
 // Declare the const LONGITUDE_FIELD for the boat's Longitude__s
 // Declare the const LATITUDE_FIELD for the boat's Latitude
 // Declare the const BOAT_FIELDS as a list of [LONGITUDE_FIELD, LATITUDE_FIELD];
-const LONGITUDE_FIELD = "";
-const LATITUDE_FIELD = "";
+const LONGITUDE_FIELD = "Boat__c.Geolocation__Longitude__s";
+const LATITUDE_FIELD = "Boat__c.Geolocation__Latitude__s";
 const ICON_STANDARD_USER = "standard:user";
 
 const BOAT_FIELDS = [LONGITUDE_FIELD, LATITUDE_FIELD];
@@ -48,8 +52,10 @@ export default class BoatMap extends LightningElement {
     // Error handling
     if (data) {
       this.error = undefined;
-      const longitude = data.fields[LONGITUDE_FIELD].value;
-      const latitude = data.fields[LATITUDE_FIELD].value;
+      const longitude =
+        data.fields[LONGITUDE_FIELD.replace("Boat__c.", "")].value;
+      const latitude =
+        data.fields[LATITUDE_FIELD.replace("Boat__c.", "")].value;
       this.updateMap(longitude, latitude);
     } else if (error) {
       this.error = error;
@@ -57,7 +63,18 @@ export default class BoatMap extends LightningElement {
       this.mapMarkers = [];
     }
   }
-
+  subscribeMC() {
+    this.subscription = subscribe(
+      this.messageContext,
+      BOATMC,
+      (message) => {
+        this.boatId = message.recordId;
+      },
+      {
+        scope: APPLICATION_SCOPE
+      }
+    );
+  }
   // Runs when component is connected, subscribes to BoatMC
   connectedCallback() {
     // recordId is populated on Record Pages, and this component
@@ -65,32 +82,22 @@ export default class BoatMap extends LightningElement {
     if (this.subscription || this.recordId) {
       return;
     }
-    this.subscription = subscribe(this.messageContext, BOATMC, (message) => {
-      console.log("boat map is receiving a message it subscribed to");
-      console.log(message);
-      this.boatId = message.recordId;
-      console.log("this boatid is ");
-      console.log(this.boatId);
-      //this.handleMessage(message);
-    });
-    // Subscribe to the message channel to retrieve the recordID and assign it to boatId.
-  }
-
-  handleMessage(message) {
-    console.log("boat map is receiving a message it subscribed to");
-    console.log(message);
-    this.boatId = message.recordId;
+    this.subscribeMC();
   }
 
   // Creates the map markers array with the current boat's location for the map.
   updateMap(Longitude, Latitude) {
-    this.mapMarkers = {
-      icon: ICON_STANDARD_USER,
-      location: {
-        Latitude: Latitude,
-        Longitude: Longitude
+    this.mapMarkers = [
+      {
+        icon: ICON_STANDARD_USER,
+        location: {
+          Latitude: Latitude,
+          Longitude: Longitude
+        }
       }
-    };
+    ];
+    console.log("updated map markers ");
+    console.log(this.mapMarkers);
   }
 
   // Getter method for displaying the map component, or a helper method.
