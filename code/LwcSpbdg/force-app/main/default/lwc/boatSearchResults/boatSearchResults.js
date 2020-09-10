@@ -178,7 +178,8 @@ export default class BoatSearchResults extends LightningElement {
 
   renderedCallback() {
     console.log(
-      "rendered callback is been called, boat type id is: " + this.boatTypeId
+      "rendered callback is been called, boat type id is: " +
+        JSON.parse(JSON.stringify(this.boatTypeId))
     );
   }
 }

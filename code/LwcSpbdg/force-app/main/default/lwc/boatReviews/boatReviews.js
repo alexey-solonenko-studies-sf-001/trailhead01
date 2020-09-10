@@ -58,6 +58,7 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
         console.log("data retrieving error", error);
       })
       .finally(() => {
+        console.log("boat reviews in finally block");
         this.isLoading = false;
       });
   }
@@ -79,5 +80,9 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  errorCallback(e) {
+    console.log("boatreview error callbab", e);
   }
 }

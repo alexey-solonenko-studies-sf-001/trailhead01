@@ -95,32 +95,14 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
 
   // Navigates back to the review list, and refreshes reviews component
   handleReviewCreated() {
-    console.log("HANDLE REVIEW CREATED");
-    this.template
-      .querySelector("lightning-tabset")
-      .setAttribute("active-tab-value", "reviews");
-    console.log(
-      this.template
-        .querySelector("lightning-tabset")
-        .getAttribute("active-tab-value")
-    );
-    console.log(this.template.querySelector("lightning-tabset").value);
-    this.template.querySelector("lightning-tabset").value = "reviews";
-    this.template
-      .querySelector("lightning-tabset")
-      .dispatchEvent(new CustomEvent("change"));
-
-    let reviewsTab = this.template.querySelectorAll("lightning-tab")[1];
-    //reviewsTab.click();
-    console.log(reviewsTab.className);
-    let review = this.template.querySelector("c-boat-reviews");
-    console.log(review);
-    review.refresh();
-
-    // let tabs = Array.from(this.template.querySelectorAl('lightning-tab'));
-    // tabs.find((t) => {
-
-    // });
+    try {
+      this.template.querySelector("lightning-tabset").activeTabValue =
+        "reviews";
+      this.template.querySelector("c-boat-reviews").refresh(); //.then(() => {}).catch((e)=>{console.log(e);});
+    } catch (e) {
+      console.log("handle review created error");
+      console.log(e);
+    }
   }
 
   errorCallback(error, stack) {
